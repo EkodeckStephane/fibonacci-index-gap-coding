@@ -1,0 +1,43 @@
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Local benchmark and tool caches
+.benchmarks/
+
+# Downloaded third-party corpora and archives
+experiments/data/downloads/
+experiments/data/canterbury/
+experiments/data/silesia/
+experiments/data/enwik8/
+experiments/data/sparse_regime/
+experiments/native/java/build/
+
+# Generated Python bytecode redirected by reproducibility runs
+experiments/results/pycache/
+
+# LaTeX intermediate files
+*.aux
+*.blg
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.abs
+
+# Extracted PDF text and temporary previews
+paper/*.txt
+*preview*.png
+
+# Local working documents not included in the reproducibility package
+Related Works_FibonacciRDH update/
+Critical_Review_FibonacciRDH.docx
+NextSteps_FibonacciRDH.docx
+Fibonacci_Inspired_Entropy_Reduction__The_Computer_Journal_Version_2.pdf
+paper/analyse_critique_FISA.docx
+paper/~$alyse_critique_FISA.docx

@@ -1,0 +1,14 @@
+{
+  "seed": 20260608,
+  "block_sizes": [16, 32, 64, 128, 256, 512],
+  "repetitions": 3,
+  "warmups": 1,
+  "synthetic_bytes_per_file": 65536,
+  "corpus_roots": [
+    "experiments/data/synthetic",
+    "experiments/data/canterbury",
+    "experiments/data/silesia"
+  ],
+  "output_csv": "experiments/results/benchmark.csv",
+  "memory_output_csv": "experiments/results/memory.csv"
+}

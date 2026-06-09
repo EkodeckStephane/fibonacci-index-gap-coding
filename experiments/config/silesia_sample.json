@@ -1,0 +1,9 @@
+{
+  "seed": 20260608,
+  "block_sizes": [64, 256, 512],
+  "repetitions": 1,
+  "warmups": 0,
+  "corpus_roots": ["experiments/data/silesia_sample"],
+  "output_csv": "experiments/results/benchmark_silesia_sample.csv"
+}
+

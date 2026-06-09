@@ -1,0 +1,147 @@
+\begin{thebibliography}{20}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Zeckendorf(1972)}]{Zeckendorf1972}
+\bibinfo{author}{E.~Zeckendorf},
+\newblock \bibinfo{title}{Repr{\'e}sentation des nombres naturels par une somme
+  de nombres de {Fibonacci} ou de nombres de {Lucas}},
+\newblock \bibinfo{journal}{Bulletin de la Soci{\'e}t{\'e} Royale des Sciences
+  de Li{\`e}ge} \bibinfo{volume}{41} (\bibinfo{year}{1972})
+  \bibinfo{pages}{179--182}.
+%Type = Article
+\bibitem[{Moffat(2019)}]{Moffat2019Huffman}
+\bibinfo{author}{A.~Moffat},
+\newblock \bibinfo{title}{Huffman coding},
+\newblock \bibinfo{journal}{ACM Computing Surveys} \bibinfo{volume}{52}
+  (\bibinfo{year}{2019}) \bibinfo{pages}{1--35}.
+%Type = Book
+\bibitem[{Bell et~al.(1990)Bell, Cleary, and Witten}]{Bell1990Text}
+\bibinfo{author}{T.~C. Bell}, \bibinfo{author}{J.~G. Cleary},
+  \bibinfo{author}{I.~H. Witten}, \bibinfo{title}{Text Compression},
+  \bibinfo{publisher}{Prentice Hall}, \bibinfo{address}{Englewood Cliffs, NJ},
+  \bibinfo{year}{1990}.
+%Type = Book
+\bibitem[{Witten et~al.(1999)Witten, Moffat, and Bell}]{Witten1999Managing}
+\bibinfo{author}{I.~H. Witten}, \bibinfo{author}{A.~Moffat},
+  \bibinfo{author}{T.~C. Bell}, \bibinfo{title}{Managing Gigabytes: Compressing
+  and Indexing Documents and Images}, \bibinfo{publisher}{Morgan Kaufmann},
+  \bibinfo{edition}{2} edition, \bibinfo{year}{1999}.
+%Type = Techreport
+\bibitem[{Burrows and Wheeler(1994)}]{Burrows1994BWT}
+\bibinfo{author}{M.~Burrows}, \bibinfo{author}{D.~J. Wheeler},
+  \bibinfo{title}{A Block-Sorting Lossless Data Compression Algorithm},
+  \bibinfo{type}{Technical Report} \bibinfo{number}{SRC Research Report 124},
+  Digital Equipment Corporation Systems Research Center, \bibinfo{year}{1994}.
+%Type = Article
+\bibitem[{Fenwick(1996)}]{Fenwick1996BWT}
+\bibinfo{author}{P.~M. Fenwick},
+\newblock \bibinfo{title}{The {Burrows--Wheeler} transform for block sorting
+  text compression: Principles and improvements},
+\newblock \bibinfo{journal}{The Computer Journal} \bibinfo{volume}{39}
+  (\bibinfo{year}{1996}) \bibinfo{pages}{731--740}.
+%Type = Misc
+\bibitem[{Collet and Kucherawy(2021)}]{Collet2021RFC8878}
+\bibinfo{author}{Y.~Collet}, \bibinfo{author}{M.~Kucherawy},
+  \bibinfo{title}{{Zstandard} compression and the `application/zstd' media
+  type}, \bibinfo{howpublished}{RFC 8878}, \bibinfo{year}{2021}.
+%Type = Inproceedings
+\bibitem[{Ellert et~al.(2023)Ellert, Fischer, and Pedersen}]{Ellert2023LZ}
+\bibinfo{author}{J.~Ellert}, \bibinfo{author}{J.~Fischer},
+  \bibinfo{author}{M.~R. Pedersen},
+\newblock \bibinfo{title}{New advances in rightmost {Lempel--Ziv}},
+\newblock in: \bibinfo{booktitle}{String Processing and Information Retrieval},
+  \bibinfo{publisher}{Springer}, \bibinfo{year}{2023}, pp.
+  \bibinfo{pages}{188--202}.
+%Type = Article
+\bibitem[{Fraenkel and Klein(1996)}]{Klein1996Fibonacci}
+\bibinfo{author}{A.~S. Fraenkel}, \bibinfo{author}{S.~T. Klein},
+\newblock \bibinfo{title}{Robust universal complete codes for transmission and
+  compression},
+\newblock \bibinfo{journal}{Discrete Applied Mathematics} \bibinfo{volume}{64}
+  (\bibinfo{year}{1996}) \bibinfo{pages}{31--55}.
+%Type = Article
+\bibitem[{Brisaboa et~al.(2021)Brisaboa, Ladra, Pedreira, and
+  Trillo}]{Brisaboa2021Fibonacci}
+\bibinfo{author}{N.~R. Brisaboa}, \bibinfo{author}{S.~Ladra},
+  \bibinfo{author}{{\'O}.~Pedreira}, \bibinfo{author}{J.~R. Trillo},
+\newblock \bibinfo{title}{On the practical use of {Fibonacci} codes for
+  indexing},
+\newblock \bibinfo{journal}{Journal of Intelligent Information Systems}
+  \bibinfo{volume}{56} (\bibinfo{year}{2021}) \bibinfo{pages}{313--341}.
+%Type = Article
+\bibitem[{Elias(1975)}]{Elias1975}
+\bibinfo{author}{P.~Elias},
+\newblock \bibinfo{title}{Universal codeword sets and representations of the
+  integers},
+\newblock \bibinfo{journal}{IEEE Transactions on Information Theory}
+  \bibinfo{volume}{21} (\bibinfo{year}{1975}) \bibinfo{pages}{194--203}.
+%Type = Article
+\bibitem[{Shapira(2023)}]{Shapira2023Natural}
+\bibinfo{author}{D.~Shapira},
+\newblock \bibinfo{title}{New compression schemes for natural number
+  sequences},
+\newblock \bibinfo{journal}{Discrete Applied Mathematics} \bibinfo{volume}{324}
+  (\bibinfo{year}{2023}) \bibinfo{pages}{96--110}.
+%Type = Article
+\bibitem[{Pooksombat et~al.(2022)Pooksombat, Udomkavanich, and
+  Kositwattanarerk}]{Pooksombat2022Multidim}
+\bibinfo{author}{P.~Pooksombat}, \bibinfo{author}{P.~Udomkavanich},
+  \bibinfo{author}{W.~Kositwattanarerk},
+\newblock \bibinfo{title}{Multidimensional {Fibonacci} coding},
+\newblock \bibinfo{journal}{Mathematics} \bibinfo{volume}{10}
+  (\bibinfo{year}{2022}) \bibinfo{pages}{1037}.
+%Type = Article
+\bibitem[{Pelkonen et~al.(2015)Pelkonen, Franklin, Cavallaro, Huang, Meza,
+  Teller, and Veeraraghavan}]{Pelkonen2015Gorilla}
+\bibinfo{author}{T.~Pelkonen}, \bibinfo{author}{S.~Franklin},
+  \bibinfo{author}{P.~Cavallaro}, \bibinfo{author}{Q.~Huang},
+  \bibinfo{author}{J.~Meza}, \bibinfo{author}{J.~Teller},
+  \bibinfo{author}{K.~Veeraraghavan},
+\newblock \bibinfo{title}{Gorilla: A fast, scalable, in-memory time series
+  database},
+\newblock \bibinfo{journal}{Proceedings of the VLDB Endowment}
+  \bibinfo{volume}{8} (\bibinfo{year}{2015}) \bibinfo{pages}{1816--1827}.
+%Type = Article
+\bibitem[{Liakos et~al.(2022)Liakos, Papakonstantinopoulou, and
+  Kotidis}]{Liakos2022Chimp}
+\bibinfo{author}{P.~Liakos}, \bibinfo{author}{K.~Papakonstantinopoulou},
+  \bibinfo{author}{Y.~Kotidis},
+\newblock \bibinfo{title}{Chimp: Efficient lossless floating point compression
+  for time series databases},
+\newblock \bibinfo{journal}{Proceedings of the VLDB Endowment}
+  \bibinfo{volume}{15} (\bibinfo{year}{2022}) \bibinfo{pages}{3058--3070}.
+%Type = Article
+\bibitem[{Blalock et~al.(2018)Blalock, Madden, and Guttag}]{Blalock2018SPRINTZ}
+\bibinfo{author}{D.~W. Blalock}, \bibinfo{author}{S.~Madden},
+  \bibinfo{author}{J.~V. Guttag},
+\newblock \bibinfo{title}{Sprintz: Time series compression for the {IoT}},
+\newblock \bibinfo{journal}{Proceedings of the ACM on Interactive, Mobile,
+  Wearable and Ubiquitous Technologies} \bibinfo{volume}{2}
+  (\bibinfo{year}{2018}) \bibinfo{pages}{93:1--93:23}.
+%Type = Misc
+\bibitem[{Pavlov(2015)}]{Pavlov2015LZMA}
+\bibinfo{author}{I.~Pavlov}, \bibinfo{title}{{LZMA} specification},
+  \bibinfo{howpublished}{LZMA SDK specification, 7-Zip}, \bibinfo{year}{2015}.
+  \bibinfo{note}{Draft specification released 14 June 2015}.
+%Type = Misc
+\bibitem[{Alakuijala and Szabadka(2016)}]{Alakuijala2016Brotli}
+\bibinfo{author}{J.~Alakuijala}, \bibinfo{author}{Z.~Szabadka},
+  \bibinfo{title}{{Brotli} compressed data format}, \bibinfo{howpublished}{RFC
+  7932}, \bibinfo{year}{2016}.
+%Type = Article
+\bibitem[{Golomb(1966)}]{Golomb1966}
+\bibinfo{author}{S.~W. Golomb},
+\newblock \bibinfo{title}{Run-length encodings},
+\newblock \bibinfo{journal}{IEEE Transactions on Information Theory}
+  \bibinfo{volume}{12} (\bibinfo{year}{1966}) \bibinfo{pages}{399--401}.
+%Type = Article
+\bibitem[{Rice and Plaunt(1971)}]{RicePlaunt1971}
+\bibinfo{author}{R.~F. Rice}, \bibinfo{author}{J.~R. Plaunt},
+\newblock \bibinfo{title}{Adaptive variable-length coding for efficient
+  compression of spacecraft television data},
+\newblock \bibinfo{journal}{IEEE Transactions on Communication Technology}
+  \bibinfo{volume}{19} (\bibinfo{year}{1971}) \bibinfo{pages}{889--897}.
+
+\end{thebibliography}

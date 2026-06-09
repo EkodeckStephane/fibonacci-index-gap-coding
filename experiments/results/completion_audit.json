@@ -1,0 +1,9 @@
+{
+  "release_version": "1.0",
+  "manuscript_status": "final",
+  "required_artifacts": 37,
+  "missing": [],
+  "empty": [],
+  "paper_sha256": "DC45295994B320037D4C1A1BA058203BBA39B5D99774A1F33105CF0FAF47F3CF",
+  "paper_author_commands": 5
+}

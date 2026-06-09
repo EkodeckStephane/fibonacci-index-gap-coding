@@ -1,0 +1,123 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage[a4paper,top=1.05cm,bottom=0.85cm,left=1.35cm,right=1.35cm]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{ragged2e}
+
+\definecolor{sectionblue}{RGB}{46,116,181}
+\hypersetup{colorlinks=true,urlcolor=blue}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2.2pt}
+\setlist[itemize]{
+  leftmargin=4.4mm,
+  labelsep=1.5mm,
+  itemsep=0.5pt,
+  topsep=0.7pt,
+  parsep=0pt,
+  partopsep=0pt
+}
+\newcommand{\lead}[1]{\textcolor{sectionblue}{\textbf{#1}}}
+
+\begin{document}
+\fontsize{9.75}{10.35}\selectfont
+\justifying
+
+\begin{flushright}
+\textbf{\fontsize{10.5}{11}\selectfont Dr. St\'ephane Ga\"el R. Ekodeck}\\
+LIRIMA, TEAM GRIMCAPE, University of Yaounde I, Cameroon\\
+\href{mailto:stephane-gael.ekodeck@facsciences-uy1.cm}{stephane-gael.ekodeck@facsciences-uy1.cm}\\
+June 9, 2026
+\end{flushright}
+\vspace{-1.5mm}
+
+The Editor-in-Chief\\
+\textit{Information Processing \& Management}\\
+Elsevier
+
+\vspace{1mm}
+Dear Editor-in-Chief,
+
+We respectfully submit our manuscript, \textbf{``Limits of Fibonacci
+Index-Gap Coding: Complete Stream Costs, Compression Bounds, and Structural
+Controls,''} for consideration as a Research Article
+in \textit{Information Processing \& Management}.
+
+\lead{Scope fit.} The manuscript addresses a general information-processing
+problem: how to evaluate an intermediate representation when every stream-level model,
+delimiter, selector, length field, and padding bit required for exact
+reconstruction must be counted. It develops a complete-cost framework for
+amortized positional representations and applies it to a fully specified
+lossless stream based on Zeckendorf index gaps. The work therefore concerns
+information representation, algorithmic processing, quantitative evaluation,
+and reproducible system design.
+
+\lead{Principal results.}
+\begin{itemize}
+  \item \textbf{Exact accounting:} A serialized format and a
+  necessary-and-sufficient gain inequality determine whether a complete
+  positional stream is shorter than its input, without treating metadata as
+  free. Here, complete cost is defined within the serialized stream boundary.
+  \item \textbf{Formal and empirical validation:} The transform is proved
+  bijective; its sufficient term bound is calibrated on Canterbury and
+  Silesia; and a compiled implementation verifies every decoding round trip
+  on complete corpora and the 100\,MB enwik8 benchmark.
+  \item \textbf{Structural controls:} Lucas indices, ordinary binary set-bit
+  positions, zero-block bitmaps, and boundary-zero trimming separate
+  number-system effects from positional sparsity and simpler zero structure.
+  \item \textbf{Reproducibility:} The public package provides the format
+  implementation, tests, configurations, result tables, figure-generation
+  scripts, and exact seeds.
+\end{itemize}
+
+\lead{Evidence and interpretation.} A full-corpus sweep over five block sizes
+places the best FISA ratios at 92.15\% for Canterbury and 98.78\% for Silesia,
+but only one and two files compress, respectively. Matched zero-bitmap and
+zero-trim controls are smaller, and established codecs win every paired file
+comparison. The manuscript treats this outcome as a limit of the Fibonacci
+construction, not as evidence for a competitive general-purpose codec.
+
+\lead{Relevance to readers.} The framework is applicable to
+information-processing methods that introduce shared dictionaries, codebooks,
+model parameters, block selectors, or other amortized side information. It
+offers researchers and practitioners a reproducible procedure for separating
+payload reduction from complete, decodable system cost.
+
+\lead{Author declarations.}
+\begin{itemize}
+  \item \textbf{Originality and exclusive submission:} The manuscript is
+  original, has not been published previously, and is not under consideration
+  elsewhere.
+  \item \textbf{Author approval:} All named authors have approved the
+  manuscript, the authorship order, and the stated contributions.
+  \item \textbf{Competing interests and funding:} The authors declare no
+  competing interests. This research received no external funding.
+  \item \textbf{Ethical compliance:} The study involves no human participants,
+  animals, personal data, or clinical interventions; it uses public benchmark
+  corpora, synthetic data, and offline computational experiments.
+\end{itemize}
+
+We believe that the manuscript's emphasis on rigorous information
+representation, transparent evaluation, and reproducible computational
+evidence will be relevant to the readership of \textit{Information Processing
+\& Management}. Thank you for considering this submission.
+
+\begin{center}
+Yours sincerely,
+\end{center}
+\vspace{0.5mm}
+
+\textbf{Dr. St\'ephane Ga\"el R. Ekodeck} (Corresponding Author)\\
+\textit{ORCID: 0000-0002-8094-8832}\\
+LIRIMA, TEAM GRIMCAPE, University of Yaounde I, Yaounde, Cameroon\\
+\href{mailto:stephane-gael.ekodeck@facsciences-uy1.cm}{stephane-gael.ekodeck@facsciences-uy1.cm}\\
+\textbf{Co-authors:} Herv\'e Tal\'e Kalachi, Serge Alain Eb\'el\'e, Norbert
+Djong Wang, and Chantal Marguerite Mveh-Abia.
+
+\end{document}

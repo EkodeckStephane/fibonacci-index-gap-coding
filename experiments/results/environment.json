@@ -1,0 +1,19 @@
+{
+  "python": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 165 Stepping 2, GenuineIntel",
+  "config": {
+    "seed": 20260608,
+    "block_sizes": [
+      64,
+      256,
+      512
+    ],
+    "repetitions": 1,
+    "warmups": 0,
+    "corpus_roots": [
+      "experiments/data/silesia_sample"
+    ],
+    "output_csv": "experiments/results/benchmark_silesia_sample.csv"
+  }
+}

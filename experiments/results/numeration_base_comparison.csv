@@ -1,0 +1,4 @@
+method,limit,gain_fraction,equal_fraction,expansion_fraction,mean_gap_bits,mean_terms,unique_best_fraction
+fibonacci,1000000,0.368697,0.174558,0.456745,19.08185,7.894458,0.0536
+lucas_greedy,1000000,0.483462,0.180675,0.335863,18.421555,8.132805,0.096236
+binary_sparse,1000000,0.983887,0.016113,0.0,15.467323,9.884999,0.736703
