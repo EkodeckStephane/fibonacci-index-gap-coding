@@ -495,8 +495,8 @@ Until a journal DOI is assigned, cite the manuscript and repository as:
 - Stéphane Gaël R. Ekodeck
 - Hervé Talé Kalachi
 - Serge Alain Ebélé
-- Norbert Djong Wang
-- Chantal Marguerite Mveh-Abia
+- Norbert Djong Wang, ORCID [`0009-0008-6902-0233`](https://orcid.org/0009-0008-6902-0233)
+- Chantal Marguerite Mveh-Abia, ORCID [`0009-0005-9398-1067`](https://orcid.org/0009-0005-9398-1067)
 
 Corresponding author:
 [stephane-gael.ekodeck@facsciences-uy1.cm](mailto:stephane-gael.ekodeck@facsciences-uy1.cm)
