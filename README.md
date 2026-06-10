@@ -170,8 +170,8 @@ Full-corpus FISA block-size sensitivity:
 
 Only one Canterbury file compresses at every tested size. Silesia has one
 compressed file through 128 bytes and two at 256 bytes. On enwik8, the
-256-byte format selects the raw-stream branch and has ratio approximately
-`1.000`.
+256-byte format selects the raw-stream branch and writes `100,000,010` bytes
+for a `100,000,000`-byte input, a ratio of `1.0000001`.
 
 Matched structural-control sweeps remain smaller. Their best weighted ratios
 are `0.8936` for the zero-block bitmap and `0.8942` for zero trim on
@@ -181,6 +181,11 @@ On complete files, the modern-codec oracle wins all `11/11` Canterbury and
 `12/12` Silesia paired comparisons. Runtime measurements remain available in
 the result files, but the paper makes no cross-codec speed claim because the
 implementations use different runtimes and bindings.
+
+Within the compiled FISA implementation, Canterbury encodes at `0.758 MiB/s`
+and decodes at `113.3 MiB/s`; Silesia encodes at `1.423 MiB/s` and decodes at
+`1305.9 MiB/s`. Encoding decomposes every candidate block, whereas decoding
+mostly copies raw blocks.
 
 A reversible byte-order sensitivity check changes the 256-byte weighted ratio
 from `0.971250` to `0.971170` on Canterbury and from `0.960765` to `0.958045`

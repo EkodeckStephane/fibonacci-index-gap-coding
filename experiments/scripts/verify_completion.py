@@ -48,6 +48,8 @@ REQUIRED = [
     "reports/21_revision_metrics.md",
     "reports/22_zeckendorf_term_scaling.md",
     "reports/23_byte_order_sensitivity.md",
+    "../paper/cover_letter_information_sciences.tex",
+    "../paper/cover_letter_information_sciences.pdf",
     "requirements.txt",
 ]
 

@@ -1150,10 +1150,12 @@ Corpus & Files & Weighted shared & Best weighted modern\\
 \midrule
 Canterbury & 11 & 0.9713 & 0.1746\\
 Silesia complete & 12 & 0.9878 & 0.2302\\
-enwik8 & 1 & $\approx 1.000$ & 0.2483\\
+enwik8 & 1 & 1.0000001 & 0.2483\\
 \bottomrule
 \end{tabular}
-\tablenote{The modern column selects the smallest tested codec for each file.}
+\tablenote{The modern column selects the smallest tested codec for each file.
+On enwik8, FISA selects raw storage and adds 10 framing bytes to the
+100,000,000-byte input.}
 \end{table*}
 
 Modern codecs win every paired file comparison. These comparisons define the
@@ -1170,6 +1172,30 @@ For context, full-corpus weighted ratios on Canterbury are 0.1746 for Brotli,
 0.1751 for LZMA, 0.1819 for PPMd, 0.1837 for Zstandard, 0.1931 for bzip2, and
 0.2589 for zlib. On full Silesia, the corresponding ratios are 0.2375,
 0.2302, 0.2367, 0.2497, 0.2572, and 0.3192.
+
+Table~\ref{tab:notable-files} reports the complete-file cases discussed in the
+text. It includes the three files that compress at 256 bytes, the
+\texttt{ooffice} prefix counterexample, and \texttt{x-ray} as a representative
+raw-fallback file.
+
+\begin{table}[t]
+\caption{Selected complete-file FISA outcomes at 256-byte blocks.}
+\label{tab:notable-files}
+\centering
+\begin{tabular}{llrr}
+\toprule
+Corpus & File & Ratio & Shared blocks\\
+\midrule
+Canterbury & \texttt{ptt5}    & 0.842370 & 411\\
+Silesia    & \texttt{mozilla} & 0.993760 & 5,309\\
+Silesia    & \texttt{mr}      & 0.773155 & 9,652\\
+Silesia    & \texttt{ooffice} & 1.000002 & 122\\
+Silesia    & \texttt{x-ray}   & 1.000001 & 0\\
+\bottomrule
+\end{tabular}
+\tablenote{A file may contain locally selected shared blocks yet still select
+the raw stream after complete stream-level accounting.}
+\end{table}
 
 \subsection{Sparse-structure controls}
 
@@ -1202,6 +1228,9 @@ machinery than Fibonacci decomposition.
 Even these controls remain far above the modern-codec oracle: their best
 weighted ratios are 0.8936 and 0.8942 on Canterbury, compared with 0.1746,
 and 0.9774 and 0.9833 on Silesia, compared with 0.2302.
+They do outperform byte RLE, whose weighted ratios are 1.5321 and 1.7288, but
+not zlib at 0.2589 and 0.3192. The controls therefore isolate zero structure
+more economically than FISA without approaching a dictionary codec.
 
 \subsection{Monotone integer sequences and enwik8}
 
@@ -1216,8 +1245,8 @@ the source distribution and monotonicity determine the appropriate code.
 
 On the 100,000,000-byte enwik8 corpus, complete ratios are 0.2483 for PPMd,
 0.2487 for LZMA, 0.2694 for Zstandard, 0.2705 for Brotli, 0.2901 for bzip2,
-0.3648 for zlib, and approximately 1.000 for compiled FISA; the latter selects
-the raw-stream branch and differs from unity only by stream framing. This
+0.3648 for zlib, and 1.0000001 for compiled FISA. FISA writes
+100,000,010 bytes: the raw input plus 10 bytes of stream framing. This
 benchmark confirms the fallback behaviour on an unfavorable large input.
 
 \subsection{Entropy and context}
@@ -1282,6 +1311,13 @@ Java implementation with cached Fibonacci tables evaluates all 211.9\,MB of
 Silesia and the 100\,MB enwik8 file. Runtime measurements are retained in the
 reproducibility package, but no cross-codec speed claim is made because the
 evaluated baselines use different runtimes and bindings.
+Within the same Java implementation, the asymmetry is substantial:
+Canterbury encodes at 0.758\,MiB/s and decodes at 113.3\,MiB/s, while Silesia
+encodes at 1.423\,MiB/s and decodes at 1305.9\,MiB/s. These are approximately
+149-fold and 918-fold differences. Encoding performs large-integer
+Zeckendorf decomposition for every candidate block. Decoding is dominated by
+copying raw data because 96.25\% of Canterbury blocks and 98.06\% of Silesia
+blocks do not use the shared representation at the 256-byte setting.
 
 The format uses one stream-level alphabet and fixed-width
 identifiers. Hierarchical alphabets, canonical entropy codes over the shared

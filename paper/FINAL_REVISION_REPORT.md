@@ -84,6 +84,30 @@ Artifacts:
   section, new table, limitations, and references.
 - `paper/generate_review.py` remains untracked and is excluded from Git.
 
+## Second-check follow-up
+
+The claim that the nine major revisions were absent from the LaTeX source was
+checked against commit `19ef854` and found to be based on an older manuscript.
+ANS, the FISA test-format title, term-count scaling, stream bounds, the revised
+highlight, direct structural comparisons, byte-order sensitivity, and the
+strengthened dependence discussion were already present.
+
+The valid new observations were incorporated:
+
+- enwik8 is now reported as exactly `1.0000001`, or 10 framing bytes above the
+  100,000,000-byte raw input;
+- the within-implementation encode/decode asymmetry is quantified and
+  explained;
+- zero controls are compared directly with both byte RLE and zlib;
+- a compact per-file table reports `ptt5`, `mozilla`, `mr`, `ooffice`, and
+  `x-ray`;
+- the IP&M cover letter was replaced by an Information Sciences letter.
+
+Information Sciences was selected because its official scope explicitly lists
+information theory, algorithm design, computer-system evaluation, and data
+compression. This retains the Elsevier CAS manuscript format without adding an
+unsupported information-retrieval application.
+
 ## Toolchain note
 
 The manuscript compiled successfully with explicit `pdflatex`, `bibtex`, and
