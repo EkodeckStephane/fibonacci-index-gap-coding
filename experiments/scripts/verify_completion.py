@@ -38,12 +38,16 @@ REQUIRED = [
     "results/prefix_full_comparison.csv",
     "results/sparse_regime.csv",
     "results/sparse_structure_baselines.csv",
+    "results/zeckendorf_term_scaling.csv",
+    "results/byte_order_sensitivity.csv",
     "reports/15_shared_stream_bounds.md",
     "reports/16_native_full_corpus.md",
     "reports/17_numeration_base_comparison.md",
     "reports/18_sparse_regime.md",
     "reports/20_sparse_structure_baselines.md",
     "reports/21_revision_metrics.md",
+    "reports/22_zeckendorf_term_scaling.md",
+    "reports/23_byte_order_sensitivity.md",
     "requirements.txt",
 ]
 

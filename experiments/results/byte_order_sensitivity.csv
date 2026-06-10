@@ -1,0 +1,5 @@
+corpus,byte_order,block_size,original_bytes,encoded_bytes,weighted_ratio
+canterbury,big,256,2810784,2729973,0.9712496584582807
+canterbury,little,256,2810784,2729749,0.9711699653904391
+silesia_sample,big,256,786432,755576,0.9607645670572916
+silesia_sample,little,256,786432,753437,0.958044687906901

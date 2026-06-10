@@ -143,6 +143,19 @@ terms across Canterbury files and `k* = 326` across Silesia files. Only
 `3.70%` of Canterbury blocks and `1.94%` of Silesia blocks satisfy the bound;
 the observed shared-mode fractions are `3.75%` and `1.94%`.
 
+Lekkerkerker's theorem predicts about `0.3981 x bit_length` Zeckendorf terms
+for generic large integers. A deterministic 5,000-sample check gives a mean of
+`815.63` terms for 2048-bit integers, and none of those samples falls below
+the measured 256-byte thresholds. The favorable corpus blocks are therefore
+strongly non-generic.
+
+The raw fallback bounds every FISA stream above by
+`1 + framing/input_size`. At the opposite extreme, the exact all-zero formula
+gives ratio `0.02345` for a 1 MiB stream with 256-byte blocks. This constructive
+case shows that FISA can represent highly structured data compactly, although
+the zero-trim and bitmap controls remain better explanations of the corpus
+gains.
+
 ### Complete positional representations
 
 Full-corpus FISA block-size sensitivity:
@@ -168,6 +181,11 @@ On complete files, the modern-codec oracle wins all `11/11` Canterbury and
 `12/12` Silesia paired comparisons. Runtime measurements remain available in
 the result files, but the paper makes no cross-codec speed claim because the
 implementations use different runtimes and bindings.
+
+A reversible byte-order sensitivity check changes the 256-byte weighted ratio
+from `0.971250` to `0.971170` on Canterbury and from `0.960765` to `0.958045`
+on fixed Silesia prefixes. The format remains normatively big-endian; this
+control shows that endianness does not change the conclusion.
 
 ### Established codec comparison
 

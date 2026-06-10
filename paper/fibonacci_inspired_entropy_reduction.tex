@@ -111,7 +111,10 @@ framing. On complete files, block size materially changes the outcome:
 Canterbury reaches its best tested FISA ratio at 32 bytes (0.9215), whereas
 Silesia reaches 0.9878 at 256 bytes. Only one Canterbury file and at most two
 Silesia files compress at any tested size. At 256 bytes, just 3.70\% and
-1.94\% of blocks satisfy the sufficient bound. Simpler controls are smaller
+1.94\% of blocks satisfy the sufficient bound. Asymptotic term-count scaling
+predicts about 815 Zeckendorf terms for a generic 2048-bit integer, versus
+measured thresholds of 326--392; none of 5,000 sampled 2048-bit integers meets
+either threshold. Simpler controls are smaller
 after their own block-size sweeps: zero trimming reaches 0.8942 on Canterbury
 and a zero-block bitmap reaches 0.9774 on Silesia. Ordinary binary set-bit gaps also dominate the optimistic
 integer comparison, and established codecs win all 11 Canterbury and all 12
@@ -123,7 +126,7 @@ sparsity and zero structure, not from the number system alone.
 \begin{highlights}
 \item FISA 1.0 serializes every field required to reconstruct the input.
 \item An exact inequality identifies when its shared stream beats raw storage.
-\item The optimistic favorable fraction reaches 40.18\% before framing costs.
+\item Generic 2048-bit integers average about 816 terms, above the 326--392 thresholds.
 \item Complete-stream ratios range from 0.9215 to 0.9878 at the best tested sizes.
 \item Binary-position and zero-structure controls explain the measured savings.
 \item Established codecs win every paired comparison on Canterbury and Silesia.
@@ -193,6 +196,11 @@ illustrates the practical importance of jointly considering ratio, framing,
 and speed \cite{Collet2021RFC8878}, while current work on Lempel--Ziv parsing
 continues to improve construction and representation methods
 \cite{Ellert2023LZ}.
+Asymmetric numeral systems provide a finite-state alternative to Huffman and
+arithmetic coding \cite{Duda2015ANS}. Zstandard uses finite-state entropy
+tables for sequence symbols \cite{Collet2021RFC8878}. Such a coder could
+replace FISA's fixed-width identifiers, but it would still have to serialize
+the gap alphabet, frequency model, block records, and final state.
 These methods learn or estimate symbol regularities across a sequence, whereas
 the positional transform considered here first maps each byte block to a
 single large integer.
@@ -311,6 +319,9 @@ $V\leftarrow[0,1,1]$\;
 }
 \Return $V$\;
 \end{algorithm}
+
+Algorithm~\ref{alg:fibonacci} favors a self-contained specification. The
+compiled implementation caches the generated table across blocks.
 
 For example, $F_{10}=55$ and $F_{20}=6765$. The index grows linearly while
 the represented value grows exponentially. This motivates representing
@@ -443,11 +454,13 @@ $w\leftarrow\lceil\log_2|\mathcal{A}|\rceil$ if $\mathcal{A}\neq\varnothing$, el
 \Return $(\mathcal{A},S,w)$\;
 \end{algorithm}
 
-\section{Proposed Fibonacci index-gap approach}
+\section{FISA 1.0 test format}
 \label{sec:method}
 
 \subsection{Encoding pipeline}
 
+FISA is specified here to make the accounting experiment reproducible. It is
+not introduced as a competitor to general-purpose codecs.
 Figure~\ref{fig:pipeline} presents the complete pipeline. The transform first
 produces an exact candidate payload. The selector then compares complete
 serialized lengths and stores either the Fibonacci payload or the raw block.
@@ -530,9 +543,9 @@ i_j=g_j+i_{j+1}.
 \label{eq:inverse}
 \end{equation}
 The gap values are frequently much smaller than the original indices. The
-representation builds an alphabet $A$ from the distinct values in
+representation builds an alphabet $\mathcal{A}$ from the distinct values in
 $G$, ordered by decreasing frequency with first occurrence as the tie-breaker.
-Each gap is replaced by its zero-based identifier in $A$.
+Each gap is replaced by its zero-based identifier in $\mathcal{A}$.
 
 \subsection{Independent per-block payload (FIPB baseline)}
 \label{sec:fipb-payload}
@@ -574,14 +587,14 @@ Both branches are decoded and verified byte-for-byte in the experiments.
 \label{prop:amortized-gain}
 Let $N=\sum_i n_i$ be the input length, $B$ the number of blocks,
 $\beta$ the nominal block size,
-$a=|A|$, $w=\lceil\log_2 a\rceil$, and $u(z)$ the byte length of unsigned
+$a=|\mathcal{A}|$, $w=\lceil\log_2 a\rceil$, and $u(z)$ the byte length of unsigned
 LEB128. If block $i$ contains $k_i$ gap symbols, define
 $q_i=\lceil k_iw/8\rceil$, $p_i=u(k_i)+u(q_i)+q_i$, and
 $s_i=\min\{n_i,p_i\}$. The complete shared representation is shorter than the
 raw stream if and only if
 \begin{equation}
 \begin{aligned}
-&u(\beta)+u(B)+u(a)+1+\sum_{g\in A}u(g)\\
+&u(\beta)+u(B)+u(a)+1+\sum_{g\in\mathcal{A}}u(g)\\
 &\quad+\sum_{i=1}^{B}\left[1+u(n_i)+u(s_i)+s_i\right] < N,
 \end{aligned}
 \label{eq:exact-shared-condition}
@@ -598,7 +611,7 @@ $L_{\mathrm{shared}}<L_{\mathrm{raw-stream}}$.
 \end{proof}
 
 Under equal amortization of the global metadata
-$C_A=u(\beta)+u(B)+u(a)+1+\sum_{g\in A}u(g)$, a computable sufficient threshold is
+$C_A=u(\beta)+u(B)+u(a)+1+\sum_{g\in\mathcal{A}}u(g)$, a computable sufficient threshold is
 \begin{equation}
 k^\star=\max\left\{k:
 1+u(n)+u(p(k))+p(k)+\left\lceil C_A/B\right\rceil<n\right\},
@@ -607,6 +620,27 @@ k^\star=\max\left\{k:
 with $p(k)=u(k)+u(\lceil kw/8\rceil)+\lceil kw/8\rceil$. Thus a term-count
 criterion is meaningful only when identifier width and amortized alphabet
 cost are also specified.
+
+\paragraph{Stream bounds and a constructive best case.}
+The raw fallback gives, for every non-empty input of $N$ bytes,
+\begin{equation}
+\frac{6+u(N)}{N}\leq \rho_{\rm FISA}
+\leq 1+\frac{6+u(N)}{N}.
+\label{eq:fisa-universal-bounds}
+\end{equation}
+The lower inequality counts only the mandatory outer fields; it is not
+generally attainable. The upper inequality follows by selecting the raw
+candidate. For an all-zero input whose length is an exact multiple of
+$\beta$, the shared alphabet is empty and the transformed length is
+\begin{equation}
+6+u(N)+u(\beta)+u(N/\beta)+2+
+\frac{N}{\beta}\left(4+u(\beta)\right).
+\label{eq:zero-stream-cost}
+\end{equation}
+At $N=1$\,MiB and $\beta=256$, Eq.~\eqref{eq:zero-stream-cost} gives a ratio
+of 0.02345. Hence there is no universal lower bound near 0.80: the useful
+class consists of highly structured inputs, although simpler zero controls
+encode that class more effectively in the corpus experiments.
 
 \subsection{FISA 1.0 stream and fallback}
 
@@ -663,8 +697,8 @@ Algorithm~\ref{alg:encode} implements this independent FIPB block selector.
 $d\leftarrow\operatorname{IntegerFromBytes}(x)$\;
 $I\leftarrow\operatorname{GreedyFibonacciIndices}(d)$\;
 $G\leftarrow R(I)$\;
-$(A,S)\leftarrow\operatorname{Alphabetize}(G)$\;
-$p\leftarrow\operatorname{Serialize}(A,S)$\;
+$(\mathcal{A},S)\leftarrow\operatorname{Alphabetize}(G)$\;
+$p\leftarrow\operatorname{Serialize}(\mathcal{A},S)$\;
 \eIf{$|p|<|x|$}{
   \Return $(\mathrm{FIB},p)$\;
 }{
@@ -748,6 +782,28 @@ chosen finite-context or alphabet code, without any reduction in source
 entropy. The empirical zero-order byte entropy reported here is
 descriptive rather than a universal finite-file lower bound.
 
+\subsection{Expected Zeckendorf term count}
+\label{sec:expected-terms}
+
+Lekkerkerker's theorem states that the average number of summands for
+integers in $[F_n,F_{n+1})$ is \cite{Kologlu2011Summands}
+\begin{equation}
+\mathbb{E}[t\mid F_n\leq d<F_{n+1}]
+=\frac{n}{\varphi^2+1}+O(1),
+\label{eq:lekkerkerker}
+\end{equation}
+where $\varphi=(1+\sqrt{5})/2$. Since
+$F_n=\varphi^n/\sqrt{5}+O(\varphi^{-n})$, a generic $\ell$-bit integer has
+\begin{equation}
+\mathbb{E}[t]
+=\frac{\ell}{(\varphi^2+1)\log_2\varphi}+O(1)
+\approx 0.3981\,\ell+O(1).
+\label{eq:expected-terms}
+\end{equation}
+This scaling predicts about 815 terms for a 2048-bit integer. It does not by
+itself determine complete stream size, but it provides a source-independent
+reference for the empirical threshold in Eq.~\eqref{eq:k-threshold}.
+
 \subsection{Complexity}
 
 Let $\ell_d$ be the bit length of the block integer, $t$ the number of selected
@@ -795,6 +851,10 @@ The 100,000,000-byte enwik8 file is evaluated by both FISA and the
 general-purpose baselines. Five deterministic monotone sequences
 of 100,000 integers cover dense, geometric, posting-like, and quadratic
 growth regimes.
+The term-count scaling check draws 5,000 uniformly sampled integers at each
+exact bit length from 128 to 2048, using seed 20260610. A separate byte-order
+check reverses each 256-byte block before encoding and after decoding; it uses
+Canterbury and the fixed Silesia prefixes.
 
 The archive SHA-256 digests are recorded in the experiment manifest and are
 verified by the reproducibility scripts before corpus extraction.
@@ -836,7 +896,7 @@ measurements are used only for exploratory ablations.
 
 \subsection{AI-assisted tooling and verification}
 
-OpenAI Codex assisted with source-code editing, experiment orchestration,
+The OpenAI Codex coding agent assisted with source-code editing, experiment orchestration,
 language editing, and manuscript-format checks. It did not supply experimental
 data or replace the stated algorithms. The authors inspected the changes,
 reran the deterministic workflows, verified every FISA stream by decoding it,
@@ -934,6 +994,37 @@ metadata, term count is the dominant local selector. It also quantifies why
 the favorable regime occupies only a small minority of standard-corpus
 blocks.
 
+\subsection{Generic term-count scaling}
+
+Table~\ref{tab:term-scaling} checks Eq.~\eqref{eq:expected-terms} using
+uniformly sampled integers of exact bit length. The asymptotic prediction and
+simulation agree closely. For 256-byte blocks, the simulated mean is 815.63
+terms, compared with the measured complete-stream thresholds of 326 on
+Silesia and 390--392 on Canterbury. None of the 5,000 sampled 2048-bit
+integers meets either threshold. The corpus fractions in
+Table~\ref{tab:kstar} are therefore attributable to non-generic structure,
+principally zero-dominated blocks.
+
+\begin{table*}[t]
+\caption{Zeckendorf term-count scaling for uniformly sampled exact-length integers.}
+\label{tab:term-scaling}
+\centering
+\begin{tabular}{rrrrrr}
+\toprule
+Block (bytes) & Bits & Asymptotic mean & Simulated mean & Std. dev. &
+Simulated range\\
+\midrule
+16  & 128  & 50.96  & 51.41  & 4.05  & 36--65\\
+32  & 256  & 101.92 & 102.17 & 5.67  & 83--122\\
+64  & 512  & 203.84 & 204.28 & 8.11  & 175--238\\
+128 & 1024 & 407.68 & 408.31 & 11.48 & 354--453\\
+256 & 2048 & 815.35 & 815.63 & 16.36 & 748--873\\
+\bottomrule
+\end{tabular}
+\tablenote{Each row contains 5,000 samples generated with seed 20260610.
+The asymptotic column uses Eq.~\eqref{eq:expected-terms}.}
+\end{table*}
+
 \subsection{Ablation of representation costs}
 
 Table \ref{tab:ablation} separates three quantities on Canterbury and fixed
@@ -976,6 +1067,8 @@ remain above raw size because each block still signals a model or parameter.
 Sharing the alphabet changes the weighted ratio from 1.5849 to 0.9713 on
 Canterbury and from 1.5955 to 0.9608 on fixed 64\,KiB Silesia prefixes.
 The payload-only entropy lower bounds are 0.9415 and 0.9483, respectively.
+These bounds also limit what a zero-order ANS replacement could recover:
+changing the identifier coder cannot remove the alphabet and record costs.
 The complete-corpus result is reported separately in
 Table~\ref{tab:corpus}.
 
@@ -1106,6 +1199,9 @@ best bitmap and trim streams save about 2.8 percentage points beyond the best
 FISA stream. On Silesia, the best bitmap saves about 1.0 percentage point.
 Block-level zero structure accounts for the favorable cases with less
 machinery than Fibonacci decomposition.
+Even these controls remain far above the modern-codec oracle: their best
+weighted ratios are 0.8936 and 0.8942 on Canterbury, compared with 0.1746,
+and 0.9774 and 0.9833 on Silesia, compared with 0.2302.
 
 \subsection{Monotone integer sequences and enwik8}
 
@@ -1167,9 +1263,13 @@ saving space once its model and records are present.
 
 \subsection{Comparison with established coding methods}
 
-FISA converts each block to one large integer and loses much of the repetition
-and context that dictionary codecs exploit. The measured gap to those codecs
-is consistent with that design choice. Fibonacci universal coding solves a
+FISA converts each block to one large integer. The mapping is reversible, so
+it does not destroy information, but the gap model no longer exposes byte
+adjacency directly. The measured first-order reductions of 1.4036 and 1.6446
+bits per byte quantify dependence available to sequence models and absent
+from FISA's blockwise identifier model. This modelling choice is consistent
+with the median 3.92--4.23 size-factor gap to the modern-codec oracle.
+Fibonacci universal coding solves a
 different problem because it self-delimits positive integers; FISA instead
 stores gaps under a shared alphabet. Binary-position gaps are the closer
 structural comparison. Their result makes clear that the favorable integer
@@ -1189,6 +1289,12 @@ identifier stream, or context models may further reduce overhead, but they
 would require separate specification and measurement. The integer sweep covers
 the range up to $10^7$; larger block integers are sampled through the corpus
 experiments rather than exhaustively enumerated.
+
+The normative format uses big-endian block integers. A reversible
+little-endian sensitivity check at 256 bytes gives 0.9712 instead of 0.9713
+on Canterbury and 0.9580 instead of 0.9608 on fixed Silesia prefixes. Byte
+order changes which boundary zeros become high-order integer zeros, but the
+measured differences do not alter the conclusion.
 
 \subsection{Implications}
 
@@ -1356,7 +1462,8 @@ results. Payload-only universal-code comparisons are labeled explicitly.
 \section*{Declaration of generative AI and AI-assisted technologies in the
 manuscript preparation process}
 
-During the preparation of this work, the authors used OpenAI Codex to assist
+During the preparation of this work, the authors used the OpenAI Codex coding
+agent to assist
 with source-code editing, experiment orchestration, language editing,
 formatting, and consistency checks. After using this service, the authors
 reviewed and edited the outputs, reran the reported workflows, verified the

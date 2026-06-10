@@ -1,4 +1,4 @@
-\begin{thebibliography}{20}
+\begin{thebibliography}{22}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\bibinfo}[2]{#2}
 \ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
@@ -54,6 +54,14 @@
 \newblock in: \bibinfo{booktitle}{String Processing and Information Retrieval},
   \bibinfo{publisher}{Springer}, \bibinfo{year}{2023}, pp.
   \bibinfo{pages}{188--202}.
+%Type = Inproceedings
+\bibitem[{Duda et~al.(2015)Duda, Tahboub, Gadgil, and Delp}]{Duda2015ANS}
+\bibinfo{author}{J.~Duda}, \bibinfo{author}{K.~Tahboub}, \bibinfo{author}{N.~J.
+  Gadgil}, \bibinfo{author}{E.~J. Delp},
+\newblock \bibinfo{title}{The use of asymmetric numeral systems as an accurate
+  replacement for {Huffman} coding},
+\newblock in: \bibinfo{booktitle}{2015 Picture Coding Symposium},
+  \bibinfo{publisher}{IEEE}, \bibinfo{year}{2015}, pp. \bibinfo{pages}{65--69}.
 %Type = Article
 \bibitem[{Fraenkel and Klein(1996)}]{Klein1996Fibonacci}
 \bibinfo{author}{A.~S. Fraenkel}, \bibinfo{author}{S.~T. Klein},
@@ -143,5 +151,14 @@
   compression of spacecraft television data},
 \newblock \bibinfo{journal}{IEEE Transactions on Communication Technology}
   \bibinfo{volume}{19} (\bibinfo{year}{1971}) \bibinfo{pages}{889--897}.
+%Type = Article
+\bibitem[{Kologlu et~al.(2011)Kologlu, Kopp, Miller, and
+  Wang}]{Kologlu2011Summands}
+\bibinfo{author}{M.~Kologlu}, \bibinfo{author}{G.~Kopp}, \bibinfo{author}{S.~J.
+  Miller}, \bibinfo{author}{Y.~Wang},
+\newblock \bibinfo{title}{On the number of summands in {Zeckendorf}
+  decompositions},
+\newblock \bibinfo{journal}{The Fibonacci Quarterly} \bibinfo{volume}{49}
+  (\bibinfo{year}{2011}) \bibinfo{pages}{116--130}.
 
 \end{thebibliography}

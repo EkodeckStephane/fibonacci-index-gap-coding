@@ -1,9 +1,9 @@
 {
   "release_version": "1.0",
   "manuscript_status": "final",
-  "required_artifacts": 37,
+  "required_artifacts": 41,
   "missing": [],
   "empty": [],
-  "paper_sha256": "DC45295994B320037D4C1A1BA058203BBA39B5D99774A1F33105CF0FAF47F3CF",
+  "paper_sha256": "1AA09159B1E34F5D8E59789320507E6E2ED33EF5B8114C7A3A5B16212221FC63",
   "paper_author_commands": 5
 }
